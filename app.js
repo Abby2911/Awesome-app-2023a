@@ -4,7 +4,7 @@ import express from 'express';
 const app = express(); // (req, res)=>{ UN MONTO DE CODIGO }
 
 // Middleware de parseo de datos del cliente
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 // Registrar nuestro primer middleware
 app.use((req, res, next) => {
@@ -27,8 +27,7 @@ app.use('/about', (req, res) => {
 });
 
 // GET /add-product
-app.use('/add-product', (req, res, next) => {
-  if (req.method === "POST") return next();
+app.get('/add-product', (req, res, next) => {
   // Sirviendo el formulario
   console.log("🔔 Sirviendo Formulario");
   res.send(`
@@ -43,7 +42,7 @@ app.use('/add-product', (req, res, next) => {
 });
 
 // POST //add-product
-app.use('/add-product', (req, res) => {
+app.post('/add-product', (req, res) => {
   // Realizando Extraccion de los datos de la peticion 
   for (const prop in req.body) {
     console.log(`${prop} : ${req.body[prop]}`);
