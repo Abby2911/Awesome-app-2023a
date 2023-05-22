@@ -1,19 +1,17 @@
 // Se importa el enrutador de Express
 import { Router } from "express";
 
+// Se importando el gestor de rutas
+import path from 'path';
+
 // Se crea una instancis del enrutador de express
 const router = Router();
 
 // GET /add-product
 router.get('/add-product', (req, res, next) => {
-    // Se sirve el formulario
-    console.log("🔊 Sirviendo Formulario...");
-    res.send(`
-    <form action="/add-product" method="POST">
-    <input type="text" name="title">
-    <button type="submit"> Add Product </button>
-    </form>
-    `);
+    // Servimos el formulario
+    console.log("🔊 Sirviendo formulario...");
+    res.sendFile(path.resolve('views', 'add-product.html'));
 });
 
 // POST /add-product 
