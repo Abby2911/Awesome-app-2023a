@@ -1,9 +1,12 @@
 // Importando Express
 import express from 'express';
+// Importando http-status
+import httpStatus from 'http-status';
 
 // Importando el enrutador
 import adminRouter from './routes/admin.routes.js';
 import shopRouter from './routes/shop.routes.js';
+import error404 from './routes/notfound.js';
 
 // Creando la instancia de express
 // que basicamente es un middleware
@@ -16,6 +19,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(adminRouter);
 // Se agrega ruta shop
 app.use(shopRouter);
+// Se agrega la ruta notfound
+app.use(notfound);
+
+// Registrando Middleeare para 
+// el error 404
+/*app.use((req, res) => {
+  res.status(httpStatus.NOT_FOUND).send(`
+  <h1 style="color: crimson; text-align: center; font-size: 400%; margin: 3em 0 0 0">
+  🙆‍♀️ 404 NOT FOUND 🙆‍♀️</h1>
+  `);
+});*/
 
 // Definiendo puertos
 const port = 3000;
