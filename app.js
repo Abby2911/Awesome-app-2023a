@@ -7,7 +7,6 @@ import path from 'path';
 // Importando el enrutador
 import adminRouter from './routes/admin.routes.js';
 import shopRouter from './routes/shop.routes.js';
-import notfound from './routes/notfound.js';
 
 // Importando ROOR_DIR
 import { ROOT_DIR } from './helpers/paths.js';
@@ -28,7 +27,10 @@ app.use('/admin', adminRouter);
 // Se agrega ruta shop
 app.use(shopRouter);
 // Se agrega la ruta notfound
-app.use(notfound);
+app.use((req, res, next) => {
+  res.status(httpStatus.NOT_FOUND)
+  .sendFile(path.resolve('views','not-found.html'))
+});
 
 // Definiendo puertos
 const port = 3000;
