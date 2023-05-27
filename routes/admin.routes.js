@@ -5,10 +5,13 @@ import { Router } from "express";
 import path from 'path';
 
 // Se importa ROOT_DIR
-import {ROOT_DIR} from '../helpers/paths.js';
+import { ROOT_DIR } from '../helpers/paths.js';
 
 // Se crea una instancis del enrutador de express
 const router = Router();
+
+// Datos en memoria volatil
+export const products = [];
 
 // GET /admin/add-product
 router.get('/add-product', (req, res, next) => {
@@ -20,9 +23,12 @@ router.get('/add-product', (req, res, next) => {
 
 // POST /admin/add-product 
 router.post('/add-product', (req, res) => {
-    // Se realiza las extraccion del 
-    // parametro dentro de la peticion 
-    console.log(req.body);
+    // Se realiza la desestructuracion de
+    // "name" de la peticion
+    const { title } = req.body;
+    // Se agrega el dato de la base de datos
+    products.push(title);
+    // Redireccionamineto
     res.redirect('/');
 });
 

@@ -7,8 +7,13 @@ import path from 'path';
 // Se crea una instancis del enrutador de express
 const router = Router();
 
+// Import productos
+import { products } from './admin.routes.js';
+
 // GET /
 router.get('/', (req, res) => {
+    // Mostrando los productos en memoria
+    console.log(products);
     console.log("🔊 Sirviendo la ruta '/'");
     res.sendFile(path.resolve('views', 'shop.html'));
 });
