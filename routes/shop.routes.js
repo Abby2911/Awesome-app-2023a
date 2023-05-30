@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     // Mostrando los productos en memoria
     console.log(products);
     console.log("🔊 Sirviendo la ruta '/'");
-    res.sendFile(path.resolve('views', 'shop.html'));
+    res.render('shop');
 });
 
 // GET /about 
