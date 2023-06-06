@@ -1,11 +1,8 @@
 // Se importa el enrutador de Express
 import { Router } from "express";
 
-// Se importando el gestor de rutas
-import path from 'path';
-
-// Se importa ROOT_DIR
-import { ROOT_DIR } from '../helpers/paths.js';
+// Se importa funciones del controlador
+import { getAddProduct, postAddProduct } from '../controllers/products.controller.js';
 
 // Se crea una instancis del enrutador de express
 const router = Router();
@@ -13,27 +10,11 @@ const router = Router();
 // Datos en memoria volatil
 export const products = [];
 
-// GET /admin/add-product
-router.get('/add-product', (req, res, next) => {
-    // Servimos el formulario
-    console.log("🔊 Sirviendo formulario...");
-    res.render('add-product', {
-        addProduct: `active`,
-        viewStyle: '/css/add-product.css',
-        docTitle: "Add Product"
-    });
-});
+/// GET /admin/add-product
+router.get('/add-product', getAddProduct);
 
-// POST /admin/add-product 
-router.post('/add-product', (req, res) => {
-    // Se realiza la desestructuracion de
-    // "name" de la peticion
-    const { title } = req.body;
-    // Se agrega el dato de la base de datos
-    products.push(title);
-    // Redireccionamineto
-    res.redirect('/');
-});
+// POST /admin/add-product
+router.post('/add-product', postAddProduct);
 
 // Exportando el entutadir admin
 export default router;

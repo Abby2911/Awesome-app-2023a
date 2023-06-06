@@ -7,6 +7,9 @@ import httpStatus from 'http-status';
 // Importando Path
 import path from 'path';
 
+// Importando los errores
+import { error404, handleOther } from './controllers/httpError.controller.js';
+
 // Temple Engine
 import { engine } from 'express-handlebars';
 
@@ -49,10 +52,15 @@ app.use(express.static(path.join(ROOT_DIR, 'public')));
 app.use('/admin', adminRouter);
 // Se agrega ruta shop
 app.use(shopRouter);
+
 // Se agrega la ruta notfound
 app.use((req, res, next) => {
-  res.status(httpStatus.NOT_FOUND)
-  .sendFile(path.resolve('views','not-found.html'))
+  error404(req, res);
+});
+
+// Se agrega la ruta 505
+app.use((err, req, res, next) => {
+  handleOther(err, req, res, next);
 });
 
 // Definiendo puertos
